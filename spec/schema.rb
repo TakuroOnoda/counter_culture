@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20120522160158) do
   end
 
   create_table "industries", :force => true do |t|
-    t.string   "name"
+    t.jsonb   "name", :default => {}
     t.integer  "reviews_count",       :default => 0, :null => false
     t.integer  "rexiews_count",       :default => 0, :null => false
     t.integer  "using_count",         :default => 0, :null => false
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(:version => 20120522160158) do
   end
 
   create_table "posts", :primary_key => "post_id", :force => true do |t|
-    t.string   "title"
+    t.jsonb   "title", :default => {}
     t.integer  "fk_subcat_id", :default => nil
     t.integer  "comments_count", :null => false, :default => 0
     t.integer  "likes_count", :null => false, :default => 0

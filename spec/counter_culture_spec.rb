@@ -54,6 +54,23 @@ RSpec.describe "CounterCulture" do
     DatabaseCleaner.clean
   end
 
+  it "create industry test", :aggregate_failures do
+
+    Mobility.locale = :en
+    model = Post.create!(title: "test 1")
+    expect(model).to be_present
+    expect(model.title).to eq("test 1")
+
+    Mobility.locale = :ja
+    model.title = "テスト　１"
+    model.save!
+    expect(model.title).to eq("テスト　１")
+
+    Mobility.locale = :en
+    expect(model.title).to eq("test 1")
+
+  end
+
   it "should use relation foreign_key correctly" do
     post = AnotherPost.new
     comment = post.comments.build
